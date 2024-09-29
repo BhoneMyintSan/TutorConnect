@@ -1,5 +1,7 @@
 README for TutorConnect Project
 
+Name : Bhone Myint San , LAURA IHECHUKWU AJAEGB
+
 TutorConnect is a web-based platform designed to connect students with professional tutors. It provides features for users to explore courses, sign up, rate services, and manage a dashboard for user ratings. The project is built using **Next.js**, **Tailwind CSS**, and **React**, and includes features such as dynamic content loading, persistent storage for ratings, and an intuitive user interface.
 
 This README provides a comprehensive overview of what has been implemented, the dependencies required, and step-by-step instructions to set up and run the project.
@@ -75,18 +77,6 @@ Technologies and Dependencies
 
 4. Local Storage
    - Browser-based storage to persist data (ratings).
-
-Dependencies to Install:
-
-```bash
-pnpm install next react react-dom
-pnpm install tailwindcss postcss autoprefixer
-pnpx tailwindcss init -p
-pnpm install bootstrap
-pnpm install swiper
-pnpm install react-hook-form
-pnpm install react-icons
-```
 
 Tailwind CSS Configuration:
 
@@ -185,23 +175,3 @@ How to Contribute
    git push origin feature/your-feature-name
    ```
 7. Open a Pull Request: Go to the original repository and click on "Pull Requests" to open a new pull request.
-
-Contact Information
-
-For any issues or suggestions, feel free to contact us at:
-- Email: u6520283@au.edu
-- Phone: +123-456-7890
-
----
-
-
-pnpm install express mongoose body-parser cors dotenv
-pnpm install bcrypt jsonwebtoken
-pnpm add concurrently --save-dev
-pnpm install express-session connect-mongo
-pnpm install react-toastify react-modal
-pnpm install react-toastify
-
-
-
-By following this README, any developer should be able to set up, run, and continue developing the TutorConnect platform seamlessly.

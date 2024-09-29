@@ -32,7 +32,8 @@
     "react-hook-form": "^7.53.0",
     "react-modal": "^3.16.1",
     "react-toastify": "^10.0.5",
-    "swiper": "^11.1.14"
+    "swiper": "^11.1.14",
+    "vercel": "^37.6.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
