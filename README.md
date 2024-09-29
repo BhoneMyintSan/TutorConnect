@@ -1,6 +1,8 @@
 README for TutorConnect Project
 
-Name : Bhone Myint San , LAURA IHECHUKWU AJAEGBU
+Name : Bhone Myint San , 
+LAURA IHECHUKWU AJAEGBU GITHUB: https://github.com/LiaIhechi/tutor-connect
+
 
 ![Screenshot 2024-09-29 204959](https://github.com/user-attachments/assets/eb847f12-9212-4e8e-b2af-b63836cea0e8)
 ![Screenshot 2024-09-29 205019](https://github.com/user-attachments/assets/b6d472f6-cfe1-4e53-8ad7-5e6253731afa)
