@@ -1,6 +1,13 @@
 README for TutorConnect Project
 
-Name : Bhone Myint San , LAURA IHECHUKWU AJAEGB
+Name : Bhone Myint San , 
+LAURA IHECHUKWU AJAEGBU GITHUB: https://github.com/LiaIhechi/tutor-connect
+
+
+![Screenshot 2024-09-29 204959](https://github.com/user-attachments/assets/eb847f12-9212-4e8e-b2af-b63836cea0e8)
+![Screenshot 2024-09-29 205019](https://github.com/user-attachments/assets/b6d472f6-cfe1-4e53-8ad7-5e6253731afa)
+![Screenshot 2024-09-29 205032](https://github.com/user-attachments/assets/6b049e45-ac19-4aa5-b97c-ae87f1a5a6e4)
+![Screenshot 2024-09-29 205042](https://github.com/user-attachments/assets/e5372864-4820-49e5-86f6-c67efae7c18c)
 
 TutorConnect is a web-based platform designed to connect students with professional tutors. It provides features for users to explore courses, sign up, rate services, and manage a dashboard for user ratings. The project is built using **Next.js**, **Tailwind CSS**, and **React**, and includes features such as dynamic content loading, persistent storage for ratings, and an intuitive user interface.
 
