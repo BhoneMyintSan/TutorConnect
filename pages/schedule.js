@@ -169,7 +169,7 @@ const Schedule = () => {
               <CardHeader>
                 <CardTitle className="text-lg">My Availability</CardTitle>
                 <CardDescription>
-                  Days and times you're available for sessions
+                  Days and times you&apos;re available for sessions
                 </CardDescription>
               </CardHeader>
 

@@ -173,7 +173,7 @@ const Reviews = () => {
                             {review.tutor.split(' ').map(n => n[0]).join('')}
                           </AvatarFallback>
                         </Avatar>
-                        <span className="text-sm font-medium">{review.tutor}'s response</span>
+                        <span className="text-sm font-medium">{review.tutor}&apos;s response</span>
                       </div>
                       <p className="text-sm text-muted-foreground">{review.response}</p>
                     </div>
