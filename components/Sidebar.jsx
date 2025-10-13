@@ -1,63 +1,124 @@
 // components/Sidebar.jsx
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { Button } from "./ui/button";
+import { Separator } from "./ui/separator";
+import {
+  Home,
+  Search,
+  User,
+  Settings,
+  BookOpen,
+  MessageSquare,
+  Calendar,
+  Star,
+  ChevronLeft,
+  ChevronRight
+} from "lucide-react";
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const router = useRouter();
 
-  // Function to handle sidebar toggle
-  const toggleSidebar = () => setIsOpen(!isOpen);
+  // Auto-collapse on mobile
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setIsCollapsed(true);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const navigationItems = [
+    { href: "/dashboard", label: "Dashboard", icon: Home },
+    { href: "/explore", label: "Explore", icon: Search },
+    { href: "/profile", label: "Profile", icon: User },
+    { href: "/courses", label: "My Courses", icon: BookOpen },
+    { href: "/messages", label: "Messages", icon: MessageSquare },
+    { href: "/schedule", label: "Schedule", icon: Calendar },
+    { href: "/reviews", label: "Reviews", icon: Star },
+    { href: "/settings", label: "Settings", icon: Settings },
+  ];
+
+  const isActive = (href) => router.pathname === href;
 
   return (
-    <>
-      {/* Sidebar Handle */}
-      <div
-        className="sidebar-handle" // The handle that triggers the sidebar
-        onMouseEnter={toggleSidebar} // Open sidebar on mouse enter
-      ></div>
-
-      {/* Sidebar */}
-      <aside
-        className={`sidebar ${isOpen ? "open" : ""}`} // Apply 'open' class if isOpen is true
-        onMouseLeave={toggleSidebar} // Close sidebar on mouse leave
+    <aside className={`relative h-[calc(100vh-4rem)] bg-card border-r transition-all duration-300 ${
+      isCollapsed ? 'w-16' : 'w-64'
+    }`}>
+      {/* Toggle Button */}
+      <Button
+        variant="ghost"
+        size="icon"
+        className="absolute -right-3 top-6 z-10 h-6 w-6 rounded-full border bg-background shadow-md hover:shadow-lg"
+        onClick={() => setIsCollapsed(!isCollapsed)}
       >
-        <div className="flex justify-end">
-          <button
-            onClick={toggleSidebar}
-            className="text-gray-700 p-4 focus:outline-none"
-          >
-            {isOpen ? "Close" : ""}
-          </button>
+        {isCollapsed ? (
+          <ChevronRight className="h-3 w-3" />
+        ) : (
+          <ChevronLeft className="h-3 w-3" />
+        )}
+      </Button>
+
+      {/* Sidebar Content */}
+      <div className="flex flex-col h-full">
+        {/* Logo Section */}
+        <div className="p-4 border-b">
+          <Link href="/" className="flex items-center space-x-3">
+            <Image
+              src="/tutorconnect-logo.png"
+              alt="TutorConnect Logo"
+              width={isCollapsed ? 32 : 40}
+              height={isCollapsed ? 32 : 40}
+              className="rounded-lg transition-all duration-300"
+              priority
+            />
+            {!isCollapsed && (
+              <span className="text-lg font-bold text-foreground">TutorConnect</span>
+            )}
+          </Link>
         </div>
-        <div className="p-4">
-          <Image
-            src="/tutorconnect-logo.png" // Ensure this path is correct for your TutorConnect logo
-            alt="TutorConnect Logo"
-            width={180}
-            height={100} // Adjusted to the probable size of your logo
-            priority
-          />
-          <div className="mt-8">
-            <Link href="/" legacyBehavior>
-              <a className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                Home
-              </a>
-            </Link>
-            <Link href="/about" legacyBehavior>
-              <a className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                About
-              </a>
-            </Link>
-            <Link href="/contact" legacyBehavior>
-              <a className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                Contact
-              </a>
-            </Link>
-          </div>
+
+        {/* Navigation */}
+        <nav className="flex-1 p-4 space-y-2">
+          {navigationItems.map((item) => (
+            <Button
+              key={item.href}
+              variant={isActive(item.href) ? "secondary" : "ghost"}
+              asChild
+              className={`w-full justify-start h-10 ${
+                isCollapsed ? 'px-2' : 'px-3'
+              }`}
+            >
+              <Link href={item.href} className="flex items-center space-x-3">
+                <item.icon className={`h-4 w-4 ${isActive(item.href) ? 'text-primary' : ''}`} />
+                {!isCollapsed && (
+                  <span className={`text-sm ${isActive(item.href) ? 'font-medium' : ''}`}>
+                    {item.label}
+                  </span>
+                )}
+              </Link>
+            </Button>
+          ))}
+        </nav>
+
+        {/* Footer Section */}
+        <div className="p-4 border-t">
+          {!isCollapsed && (
+            <div className="text-xs text-muted-foreground text-center">
+              <p>© {new Date().getFullYear()} TutorConnect</p>
+              <p className="mt-1">Version 1.0.0</p>
+            </div>
+          )}
         </div>
-      </aside>
-    </>
+      </div>
+    </aside>
   );
 };
 

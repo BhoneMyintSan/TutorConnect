@@ -1,7 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import Layout from '../components/Layout';  // Assuming you have a Layout component for common layout
+import Layout from '../components/Layout';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 
 export default function SignUp() {
     const [firstName, setFirstName] = useState('');
@@ -15,7 +19,7 @@ export default function SignUp() {
         event.preventDefault();
         setErrorMessage(''); // Reset error message before submitting
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/register`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -48,86 +52,124 @@ export default function SignUp() {
 
     return (
         <Layout>
-            <main className="flex min-h-screen flex-col items-center justify-center p-8 bg-gray-100">
-                <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-lg">
-                    <div className="flex flex-col items-center">
-                        <Image
-                            src="/tutorconnect-logo.png" // Ensure this path is correct for your logo
-                            alt="TutorConnect Logo"
-                            width={100}
-                            height={100}
-                            priority
-                        />
-                        <h2 className="mt-6 text-3xl font-extrabold text-gray-900 text-center">
-                            Create Your Account
-                        </h2>
-                        <p className="mt-2 text-sm text-gray-600 text-center">
-                            Start learning with TutorConnect today
-                        </p>
-                    </div>
-                    {errorMessage && <div className="text-red-500 text-center">{errorMessage}</div>} {/* Show error message */}
-                    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-                        <input
-                            id="first-name"
-                            name="firstName"
-                            type="text"
-                            autoComplete="given-name"
-                            required
-                            className="relative block w-full px-3 py-2 border border-gray-300 rounded-md focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                            placeholder="First Name"
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
-                        />
-                        <input
-                            id="last-name"
-                            name="lastName"
-                            type="text"
-                            autoComplete="family-name"
-                            required
-                            className="relative block w-full px-3 py-2 border border-gray-300 rounded-md focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                            placeholder="Last Name"
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
-                        />
-                        <input
-                            id="email-address"
-                            name="email"
-                            type="email"
-                            autoComplete="email"
-                            required
-                            className="relative block w-full px-3 py-2 border border-gray-300 rounded-md focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                            placeholder="Email Address"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <input
-                            id="password"
-                            name="password"
-                            type="password"
-                            autoComplete="new-password"
-                            required
-                            className="relative block w-full px-3 py-2 border border-gray-300 rounded-md focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        <button
-                            type="submit"
-                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                            Sign Up
-                        </button>
-                    </form>
-                    <div className="flex justify-between mt-6">
-                        <Link href="/signin" className="font-medium text-indigo-600 hover:text-indigo-500">
-                            Already have an account? Sign in
-                        </Link>
-                        <Link href="/" className="font-medium text-indigo-600 hover:text-indigo-500">
-                            Go back to homepage
-                        </Link>
-                    </div>
+            <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-indigo-50 py-12 px-4 sm:px-6 lg:px-8 pb-8">
+                <div className="max-w-md mx-auto">
+                    <Card>
+                        <CardHeader className="text-center">
+                            <div className="flex justify-center mb-4">
+                                <Image
+                                    src="/tutorconnect-logo.png"
+                                    alt="TutorConnect Logo"
+                                    width={80}
+                                    height={80}
+                                    priority
+                                    className="rounded-lg shadow-md"
+                                />
+                            </div>
+                            <CardTitle className="text-3xl font-bold">Create Account</CardTitle>
+                            <CardDescription className="text-lg">
+                                Join TutorConnect today
+                            </CardDescription>
+                        </CardHeader>
+
+                        <CardContent>
+                            {errorMessage && (
+                                <div className="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded-md">
+                                    <p className="text-red-700">{errorMessage}</p>
+                                </div>
+                            )}
+
+                            <form className="space-y-6" onSubmit={handleSubmit}>
+                                <div className="space-y-2">
+                                    <Label htmlFor="first-name" className="text-sm font-medium">
+                                        First Name
+                                    </Label>
+                                    <Input
+                                        id="first-name"
+                                        name="firstName"
+                                        type="text"
+                                        autoComplete="given-name"
+                                        required
+                                        placeholder="Enter your first name"
+                                        value={firstName}
+                                        onChange={(e) => setFirstName(e.target.value)}
+                                    />
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label htmlFor="last-name" className="text-sm font-medium">
+                                        Last Name
+                                    </Label>
+                                    <Input
+                                        id="last-name"
+                                        name="lastName"
+                                        type="text"
+                                        autoComplete="family-name"
+                                        required
+                                        placeholder="Enter your last name"
+                                        value={lastName}
+                                        onChange={(e) => setLastName(e.target.value)}
+                                    />
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label htmlFor="email-address" className="text-sm font-medium">
+                                        Email Address
+                                    </Label>
+                                    <Input
+                                        id="email-address"
+                                        name="email"
+                                        type="email"
+                                        autoComplete="email"
+                                        required
+                                        placeholder="Enter your email"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label htmlFor="password" className="text-sm font-medium">
+                                        Password
+                                    </Label>
+                                    <Input
+                                        id="password"
+                                        name="password"
+                                        type="password"
+                                        autoComplete="new-password"
+                                        required
+                                        placeholder="Create a password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </div>
+
+                                <Button
+                                    type="submit"
+                                    className="w-full"
+                                >
+                                    Create Account
+                                </Button>
+
+                                <div className="flex items-center justify-between mt-6 space-x-4 text-sm">
+                                    <Link
+                                        href="/signin"
+                                        className="text-primary hover:text-primary/80 font-medium transition-colors"
+                                    >
+                                        Already have an account? Sign in
+                                    </Link>
+                                    <Link
+                                        href="/"
+                                        className="text-primary hover:text-primary/80 font-medium transition-colors"
+                                    >
+                                        Back to homepage
+                                    </Link>
+                                </div>
+                            </form>
+                        </CardContent>
+                    </Card>
                 </div>
-            </main>
+            </div>
         </Layout>
     );
 }

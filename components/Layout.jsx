@@ -1,17 +1,31 @@
 // components/Layout.jsx
-import Header from "./Header";
+import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Sidebar from "./Sidebar";
+import { useRouter } from "next/router";
 
 const Layout = ({ children }) => {
+  const router = useRouter();
+
+  // Pages that should not show the sidebar
+  const noSidebarPages = ['/', '/signin', '/signup', '/about', '/contact'];
+
+  const shouldShowSidebar = !noSidebarPages.includes(router.pathname);
+
   return (
-    <div className="flex min-h-screen flex-col bg-gray-50">
-      <Sidebar />
-      <div className="flex flex-1 flex-col">
-        <Header />
-        <main className="flex-grow">{children}</main>
-        <Footer />
+    <div className="min-h-screen flex flex-col bg-background">
+      <Navbar />
+      <div className="flex flex-1">
+        {shouldShowSidebar && <Sidebar />}
+        <main className={`flex-1 transition-all duration-300 ${
+          shouldShowSidebar ? 'lg:ml-0' : ''
+        }`}>
+          <div className="flex-1 pb-20">
+            {children}
+          </div>
+        </main>
       </div>
+      <Footer />
     </div>
   );
 };

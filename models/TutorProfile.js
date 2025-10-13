@@ -15,4 +15,4 @@ const TutorProfileSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('TutorProfile', TutorProfileSchema);
+module.exports = mongoose.models.TutorProfile || mongoose.model('TutorProfile', TutorProfileSchema);

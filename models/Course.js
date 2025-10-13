@@ -1,19 +1,20 @@
 const mongoose = require('mongoose');
 
-const RatingSchema = new mongoose.Schema({
-  name: {
+const CourseSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  title: {
     type: String,
     required: true,
   },
-  email: {
+  description: {
     type: String,
     required: true,
   },
-  rating: {
-    type: Number,
-    required: true,
-  },
-  comment: {
+  image: {
     type: String,
     required: true,
   },
@@ -23,4 +24,4 @@ const RatingSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.models.Rating || mongoose.model('Rating', RatingSchema);
+module.exports = mongoose.models.Course || mongoose.model('Course', CourseSchema);
